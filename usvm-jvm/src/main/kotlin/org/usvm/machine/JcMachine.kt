@@ -18,13 +18,7 @@ import org.usvm.machine.state.JcMethodResult
 import org.usvm.machine.state.JcState
 import org.usvm.machine.state.lastStmt
 import org.usvm.ps.createPathSelector
-import org.usvm.statistics.CompositeUMachineObserver
-import org.usvm.statistics.CoverageStatistics
-import org.usvm.statistics.StatisticsByMethodPrinter
-import org.usvm.statistics.StepsStatistics
-import org.usvm.statistics.TimeStatistics
-import org.usvm.statistics.TransitiveCoverageZoneObserver
-import org.usvm.statistics.UMachineObserver
+import org.usvm.statistics.*
 import org.usvm.statistics.collectors.AllStatesCollector
 import org.usvm.statistics.collectors.CoveredNewStatesCollector
 import org.usvm.statistics.collectors.TargetsReachedStatesCollector
@@ -131,7 +125,7 @@ class JcMachine(
         val observers = mutableListOf<UMachineObserver<JcState>>(coverageStatistics)
         observers.add(timeStatistics)
         observers.add(stepsStatistics)
-
+        if (options.monitoringIsEnable) observers.add(Agent(timeStatistics, stepsStatistics, coverageStatistics))
         if (interpreterObserver is UMachineObserver<*>) {
             @Suppress("UNCHECKED_CAST")
             observers.add(interpreterObserver as UMachineObserver<JcState>)

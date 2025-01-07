@@ -259,4 +259,8 @@ data class UMachineOptions(
      * Limit loop iterations.
      * */
     val loopIterationLimit: Int? = null,
+    /**
+     * Whether to run the statistics monitoring function
+     */
+    val monitoringIsEnable: Boolean = true
 )
