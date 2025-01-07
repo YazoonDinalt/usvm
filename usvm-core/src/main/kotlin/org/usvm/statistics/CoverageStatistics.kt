@@ -65,6 +65,8 @@ class CoverageStatistics<Method, Statement, State : UState<*, Method, Statement,
         return covered.toFloat() / ((covered + uncovered).toFloat()) * 100f
     }
 
+    fun getCoverageMethods() = uncoveredStatements.keys.toList()
+
     /**
      * Returns current total coverage of all methods in coverage zone (in percents).
      */
